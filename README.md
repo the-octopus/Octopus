@@ -30,6 +30,8 @@ Octopus is a Hybrid test automation framework, that combines features of (Modula
 
 ## Installation
 
+* Install Microsoft Access database engine 2010.
+
 * Install Python 3.5.
 
 * Configure python path and pip tools.
