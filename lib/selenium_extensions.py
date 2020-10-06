@@ -18,7 +18,8 @@ from lib.globals import Globals
 
 def findElementsBy(self: (WebElement,webdriver),by=By.ID, value=None):    
     try:
-        return self.find_elements(by,value)
+        # return self.find_elements(by,value)
+        return WebDriverWait(Globals.Test.Browser, 10).until(EC.presence_of_all_elements_located((by,value)))
     except NoSuchElementException:
         return WebElement(self,id(self))
     except TimeoutException:
@@ -30,8 +31,8 @@ def findElementsBy(self: (WebElement,webdriver),by=By.ID, value=None):
 
 def findElementBy(self: (WebElement,webdriver),by=By.ID, value=None):    
     try:
-        return self.find_element(by,value)
-        # return WebDriverWait(self, 1).until(EC.presence_of_element_located((By.ID, "Passwd")))
+        # return self.find_element(by,value)
+        return WebDriverWait(Globals.Test.Browser, 10).until(EC.presence_of_element_located((by,value)))
     except NoSuchElementException:
         return WebElement(self,id(self))    
     except StaleElementReferenceException:

@@ -6,7 +6,6 @@ import sys
 
 from selenium import webdriver
 
-from lib.browsing import Browsing
 from lib.configuration import Configuration
 from lib.dataManager import DataManager
 from lib.globals import Globals

@@ -3,10 +3,10 @@ import os
 import sys
 
 from selenium import webdriver
+from selenium.webdriver.support.events import EventFiringWebDriver
 
 from lib.configuration import Configuration
-
-
+from lib.WebEventListener import WebEventListener
 
 
 class Browsing:
@@ -16,20 +16,23 @@ class Browsing:
        try:
            
            if str(sBrowserType).lower()=="chrome":
-               Browsing.Driver = webdriver.Chrome(executable_path=os.getcwd()+Configuration.appSettings["ChromeDriverPath"])
+               driver = webdriver.Chrome(executable_path=os.getcwd()+Configuration.appSettings["ChromeDriverPath"])
+               Browsing.Driver = EventFiringWebDriver(driver, WebEventListener())                
                Browsing.Driver.maximize_window()
                Browsing.Driver.implicitly_wait(5)
                Browsing.Driver.timeout = 5 
                Browsing.Driver.get(sUrl)
                
            elif str(sBrowserType).lower()=="firefox":
-               Browsing.Driver = webdriver.Firefox(executable_path=os.getcwd()+Configuration.appSettings["FirFoxDriverPath"])
+               driver = webdriver.Firefox(executable_path=os.getcwd()+Configuration.appSettings["FirFoxDriverPath"])
+               Browsing.Driver = EventFiringWebDriver(driver, WebEventListener())  
                Browsing.Driver.maximize_window()
                Browsing.Driver.implicitly_wait(5)
                Browsing.Driver.timeout = 5 
                Browsing.Driver.get(sUrl)
            else:
-               Browsing.Driver = webdriver.Edge(executable_path=os.getcwd()+Configuration.appSettings["IEedgeDriverPath"])
+               driver = webdriver.Edge(executable_path=os.getcwd()+Configuration.appSettings["IEedgeDriverPath"])
+               Browsing.Driver = EventFiringWebDriver(driver, WebEventListener())  
                Browsing.Driver.maximize_window()
                Browsing.Driver.implicitly_wait(5)
                Browsing.Driver.timeout = 5 

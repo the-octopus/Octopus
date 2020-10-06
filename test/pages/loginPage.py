@@ -18,14 +18,14 @@ class LoginPage:
     
     userName = (By.ID, 'j_username')
     password = (By.NAME,'j_password')
-    loginError = (By.XPATH,'//*[@name="login"]//div[contains(@class,"alert-danger")]')
-    submitButton = (By.NAME,'Submit')
+    loginError = (By.XPATH,'//form[@name="login"]//div[contains(@class,"alert-danger")]')
+    submitButton = (By.XPATH,'//input[@name="Submit"]')
    
    
     def set_userName(self, _userName):              
         # userNameElement = self.driver.find_element(*LoginPage.userName)
         userNameElement = self.driver.findElementBy(*LoginPage.userName)
-        userNameElement.sendKeys(_userName)
+        userNameElement.send_keys(_userName)
         
     
     
@@ -42,12 +42,12 @@ class LoginPage:
     
     def set_password(self, _password):
         pwordElement = self.driver.findElementBy(*LoginPage.password)        
-        pwordElement.sendKeys(_password)        
+        pwordElement.send_keys(_password)        
         
         
     def click_submit(self):
         submitBttn = self.driver.findElementBy(*LoginPage.submitButton)       
-        submitBttn.Click()
+        submitBttn.click()
         
         
     def login(self,tdr=dict()):
