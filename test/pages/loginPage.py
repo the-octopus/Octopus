@@ -16,10 +16,10 @@ class LoginPage:
     def __init__(self,driver):
         self.driver = driver
     
-    userName = (By.ID, 'j_username')
-    password = (By.NAME,'j_password')
-    loginError = (By.XPATH,'//form[@name="login"]//div[contains(@class,"alert-danger")]')
-    submitButton = (By.XPATH,'//input[@name="Submit"]')
+    userName = (By.ID, 'user_email')
+    password = (By.ID,'user_password')
+    loginError = (By.XPATH,'//div[contains(@class,"flash-msg error")]')
+    submitButton = (By.XPATH,'//button[@type="submit"]')
    
    
     def set_userName(self, _userName):              
@@ -46,7 +46,7 @@ class LoginPage:
         
         
     def click_submit(self):
-        submitBttn = self.driver.findElementBy(*LoginPage.submitButton)       
+        submitBttn = self.driver.findElementBy(*LoginPage.submitButton)               
         submitBttn.click()
         
         
