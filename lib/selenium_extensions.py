@@ -12,6 +12,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import Select
 
 from lib.globals import Globals
 
@@ -163,10 +164,45 @@ def waitUntilExistInDOM(self:WebElement,timeout:int=5):
         return False
 
 
+def multi_select(self:WebElement, options):
+      try:
+
+        if self is not None:            
+            select = Select(self)
+            for option in options:
+                select.select_by_visible_text(option)
+        else:
+            return False
+        
+      except NoSuchElementException:
+          return False
+      except WebDriverException:
+          return False
+      except Exception:
+          return False
+
+def select(self:WebElement, option):
+      try:
+
+        if self is not None:            
+            select = Select(self)
+            select.select_by_visible_text(option)
+        else:
+            return False
+        
+      except NoSuchElementException:
+          return False
+      except WebDriverException:
+          return False
+      except Exception:
+          return False
+
 WebDriver.findElementBy = findElementBy
 WebDriver.findElementsBy = findElementsBy
 
 
+WebElement.multi_select = multi_select
+WebElement.select = select
 WebElement.findElementBy = findElementBy
 WebElement.findElementsBy = findElementsBy
 WebElement.isEnabled = isEnabled

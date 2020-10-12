@@ -5,7 +5,7 @@ from lib.reporter import Reporter
 from lib.selenium_extensions import (Click, findElementBy, isDisplayed,
                                      isEnabled, isSelected, sendKeys,
                                      waitUntilDisplay, waitUntilExistInDOM,
-                                     waitUntilHidden)
+                                     waitUntilHidden,select,multi_select)
 
 
 class LoginPage:
@@ -20,7 +20,22 @@ class LoginPage:
     password = (By.ID,'user_password')
     loginError = (By.XPATH,'//div[contains(@class,"flash-msg error")]')
     submitButton = (By.XPATH,'//button[@type="submit"]')
+    lstCountriesLocator = (By.XPATH,'//button[@type="submit"]')
+
+
+    userNameElement=None
+    pwordElement=None
+    submitBttn=None
+    lstCountries=None
    
+
+   # Example to explain how to use the select method
+
+    def select_country(self, strCountry):              
+        # userNameElement = self.driver.find_element(*LoginPage.userName)
+        lstCountries = self.driver.findElementBy(*LoginPage.lstCountriesLocator)
+        lstCountries.select(strCountry)
+        
    
     def set_userName(self, _userName):              
         # userNameElement = self.driver.find_element(*LoginPage.userName)
@@ -51,6 +66,7 @@ class LoginPage:
         
         
     def login(self,tdr=dict()):
-        self.set_userName(tdr["userID"])
-        self.set_password(tdr["Password"])        
-        self.click_submit()
+        if waitUntilDisplay(userNameElement,30):            
+            self.set_userName(tdr["userID"])
+            self.set_password(tdr["Password"])        
+            self.click_submit()
